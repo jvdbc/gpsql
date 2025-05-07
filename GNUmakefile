@@ -4,6 +4,7 @@ default: build
 PROJECT_NAME := $(notdir $(CURDIR))
 GSMTP-CLI := "gsmtp-cli"
 GPSQL-WEB := "gpsql-web"
+GMETRIC-AWS := "gmetric-aws"
 
 .PHONY: $(PROJECT_NAME)
 
@@ -11,6 +12,7 @@ project-name:
 	@echo "PROJECT_NAME: $(PROJECT_NAME)"
 	@echo "GSMTP-CLI: $(GSMTP-CLI)"
 	@echo "GPSQL-WEB: $(GPSQL-WEB)"
+	@echo "GMETRIC-AWS: $(GMETRIC-AWS)"
 
 clean: project-name
 	rm -rf $(CURDIR)/build
@@ -26,3 +28,5 @@ build: install
 	export GOOS=linux && export GOARCH=amd64 && go build -C $(CURDIR)/cmd/$(GSMTP-CLI) -o $(CURDIR)/build/linux_amd64
 	export GOOS=darwin && export GOARCH=arm64 && go build -C $(CURDIR)/cmd/$(GPSQL-WEB) -o $(CURDIR)/build/macos_arm64
 	export GOOS=linux && export GOARCH=amd64 && go build -C $(CURDIR)/cmd/$(GPSQL-WEB) -o $(CURDIR)/build/linux_amd64
+	export GOOS=darwin && export GOARCH=arm64 && go build -C $(CURDIR)/cmd/$(GMETRIC-AWS) -o $(CURDIR)/build/macos_arm64
+	export GOOS=linux && export GOARCH=amd64 && go build -C $(CURDIR)/cmd/$(GMETRIC-AWS) -o $(CURDIR)/build/linux_amd64
